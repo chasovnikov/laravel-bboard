@@ -30,15 +30,16 @@ Route::post('/home', [HomeController::class, 'storeBb'])
     ->name('bb.store');
 
 Route::get('/home/{bb}/edit', [HomeController::class, 'showEditBbForm'])
-    ->name('bb.edit');
+    ->name('bb.edit')->middleware('can:update,bb');
 
 Route::patch('/home/{bb}', [HomeController::class, 'updateBb'])
-    ->name('bb.update');
+    ->name('bb.update')->middleware('can:update,bb');
 
 Route::get('/home/{bb}/delete', [HomeController::class, 'showDeleteBbForm'])
-    ->name('bb.delete');
+    ->name('bb.delete')->middleware('can:destroy,bb');
 
 Route::delete('/home/{bb}', [HomeController::class, 'destroyBb'])
-    ->name('bb.destroy');
+    ->name('bb.destroy')->middleware('can:destroy,bb');
+
 
 Route::get('/{bb}', [BbsController::class, 'detail'])->name('detail');
