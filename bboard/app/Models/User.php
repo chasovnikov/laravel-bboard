@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bb::class);
     }
+
+    public function getNameAndEmail()
+    {
+        return $this->name . ' (' . $this->email . ')';
+    }
 }
