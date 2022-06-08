@@ -22,7 +22,7 @@
             </td>
             <td>>{{ $bb->price }}</td>
             <td>
-                <a href="{{ route('detail', ['bb' => $bb->id]) }}">Подробнее...</a>
+                <a href="{{ route('bb.show', ['bb' => $bb->id]) }}">Подробнее...</a>
             </td>
         </tr>
         @endforeach

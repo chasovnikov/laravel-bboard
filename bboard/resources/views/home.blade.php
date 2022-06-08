@@ -6,6 +6,7 @@
 
 <h2>Добро пожаловать, {{ Auth::user()->name }}!</h2>
 <p class="text-right"><a href="{{ route('bb.add') }}">Добавить объявление</a></p>
+<p class="text-right"><a href="{{ route('rubric.add') }}">Добавить рубрику</a></p>
 
 @if (count($bbs) > 0)
 <table class="table table-striped">

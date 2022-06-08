@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Account;
 
+use App\Http\Controllers\Controller;
 use App\Models\Rubric;
 use App\Http\Requests\StoreRubricRequest;
 use App\Http\Requests\UpdateRubricRequest;
@@ -15,7 +16,9 @@ class RubricController extends Controller
      */
     public function index()
     {
-        //
+        return view('index', [
+            'rubrics' => Rubric::all(['name']),
+        ]);
     }
 
     /**
@@ -25,7 +28,9 @@ class RubricController extends Controller
      */
     public function create()
     {
-        //
+        dd(__METHOD__);
+
+        return null;
     }
 
     /**
@@ -36,7 +41,9 @@ class RubricController extends Controller
      */
     public function store(StoreRubricRequest $request)
     {
-        //
+        dd(__METHOD__);
+
+        return null;
     }
 
     /**
@@ -47,7 +54,9 @@ class RubricController extends Controller
      */
     public function show(Rubric $rubric)
     {
-        //
+        dd(__METHOD__);
+
+        return null;
     }
 
     /**
@@ -58,7 +67,9 @@ class RubricController extends Controller
      */
     public function edit(Rubric $rubric)
     {
-        //
+        dd(__METHOD__);
+
+        return null;
     }
 
     /**
@@ -70,7 +81,9 @@ class RubricController extends Controller
      */
     public function update(UpdateRubricRequest $request, Rubric $rubric)
     {
-        //
+        dd(__METHOD__);
+
+        return null;
     }
 
     /**
@@ -81,6 +94,8 @@ class RubricController extends Controller
      */
     public function destroy(Rubric $rubric)
     {
-        //
+        dd(__METHOD__);
+
+        return null;
     }
 }
