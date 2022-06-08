@@ -41,6 +41,7 @@
         </span>
         @enderror
     </div>
-    <input type="submit" class="btn btn-primary" value="Сохранить">
+    <input 
+type="submit" class="btn btn-primary" value="Сохранить">
 </form>
 @endsection

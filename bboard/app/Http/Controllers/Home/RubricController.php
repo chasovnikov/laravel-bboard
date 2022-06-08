@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Account;
+namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Rubric;

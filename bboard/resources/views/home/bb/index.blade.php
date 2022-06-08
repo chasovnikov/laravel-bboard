@@ -5,8 +5,8 @@
 @section('main')
 
 <h2>Добро пожаловать, {{ Auth::user()->name }}!</h2>
-<p class="text-right"><a href="{{ route('bb.add') }}">Добавить объявление</a></p>
-<p class="text-right"><a href="{{ route('rubric.add') }}">Добавить рубрику</a></p>
+<p class="text-right"><a href="{{ route('bb.create') }}">Добавить объявление</a></p>
+<p class="text-right"><a href="{{ route('rubric.create') }}">Добавить рубрику</a></p>
 
 @if (count($bbs) > 0)
 <table class="table table-striped">
@@ -30,7 +30,7 @@
                 <a href="{{ route('bb.edit', ['bb' => $bb->id]) }}">Изменить</a>
             </td>
             <td>
-                <a href="{{ route('bb.delete', ['bb' => $bb->id]) }}">Удалить</a>
+                <a href="{{ route('bb.destroy', ['bb' => $bb->id]) }}">Удалить</a>
             </td>
         </tr>
         @endforeach

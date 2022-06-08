@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Account\BbController;
-use App\Http\Controllers\Account\RubricController;
+use App\Http\Controllers\Home\BbController;
+use App\Http\Controllers\Home\RubricController;
+use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,32 +17,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/account')->name('home');
+// Route::redirect('/', '/home')->name('home');
 
 Auth::routes();
 
-Route::group(['namespace' => 'App\Http\Controllers\Account', 'prefix' => 'account'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\Home', 'prefix' => 'home'], function () {
 
     Route::controller(BbController::class)->group(function () {
-        Route::get('/', 'index')->name('index');
+        Route::get('/', 'index')->name('home');
         Route::get('/bbs/create', 'create')->name('bb.create');
-        Route::get('/bbs', 'store')->name('bb.store');
+        Route::post('/bbs', 'store')->name('bb.store');
         Route::get('bbs.{bb}', 'show')->name('bb.show');
         Route::get('/bbs/{bb}/edit', 'edit')->name('bb.edit');
-        Route::get('/bbs/{bb}', 'update')->name('bb.update');
-        Route::get('/bbs/{bb}', 'destroy')->name('bb.destroy');
+        Route::patch('/bbs/{bb}', 'update')->name('bb.update');
+        Route::delete('/bbs/{bb}', 'destroy')->name('bb.destroy');
     });
 
     Route::controller(RubricController::class)->group(function () {
         Route::get('/rubrics', 'index')->name('rubric.index');
         Route::get('/rubrics/create', 'create')->name('rubric.create');
-        Route::get('/rubrics', 'store')->name('rubric.store');
+        Route::post('/rubrics', 'store')->name('rubric.store');
         Route::get('/rubrics/{rubric}', 'show')->name('rubric.show');
         Route::get('/rubrics/{rubric}/edit', 'edit')->name('rubric.edit')
             ->middleware('can:update,bb');
-        Route::get('/rubrics/{rubric}', 'update')->name('rubric.update')
+        Route::patch('/rubrics/{rubric}', 'update')->name('rubric.update')
             ->middleware('can:update,bb');
-        Route::get('/rubrics/{rubric}', 'destroy')->name('rubric.destroy')
+        Route::delete('/rubrics/{rubric}', 'destroy')->name('rubric.destroy')
             ->middleware('can:destroy,bb');
     });
 });
@@ -68,7 +69,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Account', 'prefix' => 'accoun
 //     ->name('bb.destroy')->middleware('can:destroy,bb');
 
 
-// Route::get('/{bb}', [BbsController::class, 'detail'])->name('detail');
+Route::get('/', [PublicController::class, 'index'])->name('index');
+Route::get('/{bb}', [PublicController::class, 'show'])->name('bb.show');
 
 
 // Route::get('/home/rubric_add', [RubricController::class, 'create'])
