@@ -23,6 +23,8 @@ return new class extends Migration
 
             $table->timestamps();
             $table->index('created_at');
+
+            $table->softDeletes();
         });
     }
 
