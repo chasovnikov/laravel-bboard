@@ -21,6 +21,7 @@ class BbFactory extends Factory
             'content' => $this->faker->text(400),
             'price' => $this->faker->numberBetween(1, 10000),
             'user_id' => $this->faker->numberBetween(1, 5),
+            'rubric_id' => $this->faker->numberBetween(1, 15),
         ];
     }
 }

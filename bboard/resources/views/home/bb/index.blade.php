@@ -30,7 +30,11 @@
                 <a href="{{ route('bb.edit', ['bb' => $bb->id]) }}">Изменить</a>
             </td>
             <td>
-                <a href="{{ route('bb.destroy', ['bb' => $bb->id]) }}">Удалить</a>
+                <form action="{{ route('bb.destroy', ['bb' => $bb->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" class="btn btn-danger" value="Удалить">
+                </form>
             </td>
         </tr>
         @endforeach

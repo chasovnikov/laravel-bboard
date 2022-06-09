@@ -18,12 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // Bb::factory(1)->create([
-        //     'title' => 'Шкаф',
-        //     'content' => 'Деревянный двустворчатый',
-        //     'price' => 6000,
-        //     'user_id' => 1,
-        // ]);
+        Rubric::factory(24)->create();
+        Bb::factory(300)->create();
 
         // Bb::factory(1)->create([
         //     'title' => 'Грузовик',
@@ -46,24 +42,20 @@ class DatabaseSeeder extends Seeder
         //     'user_id' => 1,
         // ]);
 
-        Rubric::factory(1)->create([
-            'name' => 'Мебель',
-            'parent_id' => null,
-        ]);
 
-        Rubric::factory(1)->create([
-            'name' => 'Техника',
-            'parent_id' => null,
-        ]);
+        // Rubric::factory(1)->create([
+        //     'name' => 'Техника',
+        //     'parent_id' => null,
+        // ]);
 
-        Rubric::factory(1)->create([
-            'name' => 'Сельхозтехника',
-            'parent_id' => 2,
-        ]);
+        // Rubric::factory(1)->create([
+        //     'name' => 'Сельхозтехника',
+        //     'parent_id' => 2,
+        // ]);
 
-        Rubric::factory(1)->create([
-            'name' => 'Строительная техника',
-            'parent_id' => 2,
-        ]);
+        // Rubric::factory(1)->create([
+        //     'name' => 'Строительная техника',
+        //     'parent_id' => 2,
+        // ]);
     }
 }

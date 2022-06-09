@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bb;
+use App\Models\Rubric;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,7 +55,9 @@ class BbController extends Controller
      */
     public function create()
     {
-        return view('home.bb.create');
+        return view('home.bb.create', [
+            'rubrics' => Rubric::get('name', 'id'),
+        ]);
     }
 
     /**
@@ -88,6 +91,7 @@ class BbController extends Controller
     public function show(Bb $bb)
     {
         dd(__METHOD__);
+
         return view('show', ['bb' => $bb]);
     }
 
@@ -109,9 +113,8 @@ class BbController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $bb)
+    public function update(Request $request, Bb $bb)
     {
-        dd(__METHOD__);
         $validated = $request->validate(
             self::BB_VALIDATOR,
             self::BB_ERROR_MESSAGES
@@ -133,7 +136,7 @@ class BbController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($bb)
+    public function destroy(Bb $bb)
     {
         $bb->delete();
 

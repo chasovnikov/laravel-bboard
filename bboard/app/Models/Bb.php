@@ -9,7 +9,9 @@ class Bb extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content', 'price'];
+    protected $fillable = [
+        'title', 'content', 'price', 'user_id', 'rubric_id'
+    ];
     protected $dates = ['published_at'];
     protected $casts = ['price' => 'integer'];
 

@@ -18,7 +18,7 @@ class RubricFactory extends Factory
     {
         return [
             'name' => $this->faker->text(50),
-            'parent_id' => $this->faker->numberBetween(1, 5),
+            'parent_id' => $this->faker->numberBetween(0, 5),
         ];
     }
 }

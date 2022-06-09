@@ -10,6 +10,10 @@ class Rubric extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name', 'parent_id'
+    ];
+
     public function bbs()
     {
         return $this->hasMany(Bb::class);
