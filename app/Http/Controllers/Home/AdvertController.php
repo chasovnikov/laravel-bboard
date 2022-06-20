@@ -3,20 +3,22 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bb;
-use App\Models\Rubric;
+use App\Models\Advert;
+use App\Http\Requests\StoreAdvertRequest;
+use App\Http\Requests\UpdateAdvertRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class BbController extends Controller
+class AdvertController extends Controller
 {
-    private const BB_VALIDATOR = [
+    private const ADVERT_VALIDATOR = [
         'title' => 'required|max:50',
-        'content' => 'required',
+        'description' => 'required',
         'price' => 'required|numeric',
     ];
 
-    private const BB_ERROR_MESSAGES = [
+    private const ADVERT_ERROR_MESSAGES = [
         'price.required' => 'Раздавать товары бесплатно нельзя',
         'required' => 'Заполните это поле',
         'max' => 'Значение не должно быть длиннее :max символов',
@@ -41,9 +43,9 @@ class BbController extends Controller
     public function index()
     {
         return view(
-            'home.bb.index',
+            'home.advert.index',
             [
-                'bbs' => Auth::user()->bbs()->latest()->get(),
+                'adverts' => Auth::user()->adverts()->latest()->get(),
             ]
         );
     }
@@ -55,8 +57,8 @@ class BbController extends Controller
      */
     public function create()
     {
-        return view('home.bb.create', [
-            'rubrics' => Rubric::get('name', 'id'),
+        return view('home.advert.create', [
+            'rubrics' => Category::get('name', 'id', 'parent_id'),
         ]);
     }
 
@@ -69,13 +71,13 @@ class BbController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate(
-            self::BB_VALIDATOR,
-            self::BB_ERROR_MESSAGES
+            self::ADVERT_VALIDATOR,
+            self::ADVERT_ERROR_MESSAGES
         );
 
-        Auth::user()->bbs()->create([
+        Auth::user()->adverts()->create([
             'title' => $validated['title'],
-            'content' => $validated['content'],
+            'description' => $validated['description'],
             'price' => $validated['price'],
         ]);
 
@@ -88,11 +90,11 @@ class BbController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Bb $bb)
+    public function show(Advert $advert)
     {
         dd(__METHOD__);
 
-        return view('show', ['bb' => $bb]);
+        return view('show', ['advert' => $advert]);
     }
 
     /**
@@ -101,9 +103,9 @@ class BbController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bb $bb)
+    public function edit(Advert $advert)
     {
-        return view('home.bb.edit', ['bb' => $bb]);
+        return view('home.advert.edit', ['advert' => $advert]);
     }
 
     /**
@@ -113,19 +115,19 @@ class BbController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bb $bb)
+    public function update(Request $request, Advert $advert)
     {
         $validated = $request->validate(
-            self::BB_VALIDATOR,
-            self::BB_ERROR_MESSAGES
+            self::ADVERT_VALIDATOR,
+            self::ADVERT_ERROR_MESSAGES
         );
 
-        $bb->fill([
+        $advert->fill([
             'title' => $validated['title'],
             'content' => $validated['content'],
             'price' => $validated['price'],
         ]);
-        $bb->save();
+        $advert->save();
 
         return redirect()->route('home');
     }
@@ -136,9 +138,9 @@ class BbController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bb $bb)
+    public function destroy(Advert $advert)
     {
-        $bb->delete();
+        $advert->delete();
 
         return redirect()->route('home');
     }

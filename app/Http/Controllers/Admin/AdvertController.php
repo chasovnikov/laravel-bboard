@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Advert;
 use App\Http\Requests\StoreAdvertRequest;
 use App\Http\Requests\UpdateAdvertRequest;
