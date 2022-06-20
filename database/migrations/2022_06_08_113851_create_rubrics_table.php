@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
 
             $table->unsignedBigInteger('parent_id')->default(0);
-            $table->foreign('parent_id')->references('id')
-                ->on('rubrics')->onDelete('restrict');
+            // $table->foreign('parent_id')->references('id')
+            //     ->on('rubrics')->onDelete('restrict');
 
             $table->timestamps();
         });

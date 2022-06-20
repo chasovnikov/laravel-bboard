@@ -9,6 +9,17 @@ use App\Http\Requests\UpdateRubricRequest;
 
 class RubricController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,9 +39,9 @@ class RubricController extends Controller
      */
     public function create()
     {
-        dd(__METHOD__);
-
-        return null;
+        return view('home.rubric.create', [
+            'rubrics' => Rubric::get('name', 'id'),
+        ]);
     }
 
     /**
@@ -41,9 +52,12 @@ class RubricController extends Controller
      */
     public function store(StoreRubricRequest $request)
     {
-        dd(__METHOD__);
+        Rubric::create([
+            'name' => $request['name'],
+            'parent_id' => $request['parent_id'],
+        ]);
 
-        return null;
+        return redirect()->route('home');
     }
 
     /**
