@@ -17,7 +17,12 @@ class AdvertFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->text(50),
+            'description' => $this->faker->text(400),
+            'price' => $this->faker->numberBetween(1, 10000),
+            'user_id' => $this->faker->numberBetween(1, 5),
+            'category_id' => $this->faker->numberBetween(1, 5),
+            'status_id' => $this->faker->numberBetween(1, 3),
         ];
     }
 }
