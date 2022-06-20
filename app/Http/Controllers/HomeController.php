@@ -41,7 +41,7 @@ class HomeController extends Controller
         return view(
             'home',
             [
-                'bbs' => Auth::user()->bbs()->latest()->get(),
+                'bbs' => Auth::user()->adverts()->latest()->get(),
             ]
         );
     }

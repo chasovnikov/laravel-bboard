@@ -28,8 +28,13 @@ class Advert extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function rubric()
+    public function category()
     {
-        return $this->belongsTo(Rubric::class);
+        return $this->belongsTo(Category::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }
