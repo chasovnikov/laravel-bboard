@@ -4,7 +4,7 @@
 
 @section('main')
 
-@if (count($bbs) > 0)
+@if (count($adverts) > 0)
 <table class="table table-striped">
     <thead>
         <tr>
@@ -15,14 +15,14 @@
     </thead>
     <tbody>
 
-        @foreach ($bbs as $bb)
+        @foreach ($adverts as $advert)
         <tr>
             <td>
-                <h3>>{{ $bb->title }}</h3>
+                <h3>{{ $advert->title }}</h3>
             </td>
-            <td>>{{ $bb->price }}</td>
+            <td>{{ $advert->price }}</td>
             <td>
-                <a href="{{ route('bb.show', ['bb' => $bb->id]) }}">Подробнее...</a>
+                <a href="{{ route('advert.show', ['advert' => $advert->id]) }}">Подробнее...</a>
             </td>
         </tr>
         @endforeach

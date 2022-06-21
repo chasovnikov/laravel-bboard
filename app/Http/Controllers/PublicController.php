@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Advert;
 
-class AdvertPublicController extends Controller
+class PublicController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,10 @@ class AdvertPublicController extends Controller
      */
     public function index()
     {
-        //
+        return view('index', [
+                'adverts' => Advert::latest()->get(),
+            ]
+        );
     }
 
     /**
@@ -24,6 +27,6 @@ class AdvertPublicController extends Controller
      */
     public function show(Advert $advert)
     {
-        //
+        return view('show', compact('advert'));
     }
 }

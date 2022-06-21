@@ -1,12 +1,12 @@
 @extends('layouts.base')
 
-@section('title', $bb->title)
+@section('title', $advert->title)
 
 @section('main')
 
-    <h2>{{ $bb->title }}</h2>
-    <p>{{ $bb->content }}</p>
-    <p>{{ $bb->price }} руб.</p>
+    <h2>{{ $advert->title }}</h2>
+    <p>{{ $advert->content }}</p>
+    <p>{{ $advert->price }} руб.</p>
     <p><a href="{{ route('index') }}">На перечень объявлений</a></p>
 
 @endsection
