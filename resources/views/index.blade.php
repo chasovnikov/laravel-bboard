@@ -22,7 +22,7 @@
             </td>
             <td>{{ $advert->price }}</td>
             <td>
-                <a href="{{ route('advert.show', ['advert' => $advert->id]) }}">Подробнее...</a>
+                <a href="{{ route('public.show', ['advert' => $advert->id]) }}">Подробнее...</a>
             </td>
         </tr>
         @endforeach

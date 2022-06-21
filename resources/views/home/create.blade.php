@@ -6,7 +6,7 @@
 
 <h2>Добавление объявления</h2>
 
-<form action="{{ route('bb.store') }}" method="POST">
+<form action="{{ route('advert.store') }}" method="POST">
 
     @csrf
 
@@ -67,7 +67,7 @@
 
 
 
-    <input 
+    <input
 type="submit" class="btn btn-primary" value="Добавить">
 
 </form>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdvertController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,10 +22,24 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::group(['namespace' => 'App\Http\Controllers\Home', 'prefix' => 'home'], function () {
+Route::controller(PublicController::class)->group(function () {
+    Route::get('/', 'index')->name('public.index');
+    Route::get('adverts.{advert}', 'show')->name('public.show');
+});
 
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('home.index');
+    Route::get('/adverts/create', 'create')->name('home.create');
+    Route::post('/adverts', 'store')->name('home.store');
+    Route::get('adverts.{advert}', 'show')->name('home.show');
+    Route::get('/adverts/{advert}/edit', 'edit')->name('home.edit');
+    Route::patch('/adverts/{advert}', 'update')->name('home.update');
+    Route::delete('/adverts/{advert}', 'destroy')->name('home.destroy');
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
     Route::controller(AdvertController::class)->group(function () {
-        Route::get('/', 'index')->name('home');
+        Route::get('/', 'index')->name('advert.index');
         Route::get('/adverts/create', 'create')->name('advert.create');
         Route::post('/adverts', 'store')->name('advert.store');
         Route::get('adverts.{advert}', 'show')->name('advert.show');
@@ -47,6 +62,4 @@ Route::group(['namespace' => 'App\Http\Controllers\Home', 'prefix' => 'home'], f
     });
 });
 
-Route::get('/', [PublicController::class, 'index'])->name('index');
-Route::get('/{advert}', [PublicController::class, 'show'])->name('advert.show');
 
