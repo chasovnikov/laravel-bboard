@@ -26,15 +26,16 @@ Route::controller(PublicController::class)->group(function () {
     Route::get('/', 'index')->name('public.index');
     Route::get('adverts.{advert}', 'show')->name('public.show');
 });
-
-Route::controller(HomeController::class)->group(function () {
-    Route::get('/', 'index')->name('home.index');
-    Route::get('/adverts/create', 'create')->name('home.create');
-    Route::post('/adverts', 'store')->name('home.store');
-    Route::get('adverts.{advert}', 'show')->name('home.show');
-    Route::get('/adverts/{advert}/edit', 'edit')->name('home.edit');
-    Route::patch('/adverts/{advert}', 'update')->name('home.update');
-    Route::delete('/adverts/{advert}', 'destroy')->name('home.destroy');
+Route::group(['prefix' => 'home'], function () {
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('/', 'index')->name('home.index');
+        Route::get('/adverts/create', 'create')->name('home.create');
+        Route::post('/adverts', 'store')->name('home.store');
+        Route::get('adverts.{advert}', 'show')->name('home.show');
+        Route::get('/adverts/{advert}/edit', 'edit')->name('home.edit');
+        Route::patch('/adverts/{advert}', 'update')->name('home.update');
+        Route::delete('/adverts/{advert}', 'destroy')->name('home.destroy');
+    });
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
@@ -49,15 +50,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'],
     });
 
     Route::controller(CategoryController::class)->group(function () {
-        Route::get('/categorys', 'index')->name('category.index');
-        Route::get('/categorys/create', 'create')->name('category.create');
-        Route::post('/categorys', 'store')->name('category.store');
-        Route::get('/categorys/{category}', 'show')->name('category.show');
-        Route::get('/categorys/{category}/edit', 'edit')->name('category.edit')
+        Route::get('/categories', 'index')->name('category.index');
+        Route::get('/categories/create', 'create')->name('category.create');
+        Route::post('/categories', 'store')->name('category.store');
+        Route::get('/categories/{category}', 'show')->name('category.show');
+        Route::get('/categories/{category}/edit', 'edit')->name('category.edit')
             ->middleware('can:update,advert');
-        Route::patch('/categorys/{category}', 'update')->name('category.update')
+        Route::patch('/categories/{category}', 'update')->name('category.update')
             ->middleware('can:update,advert');
-        Route::delete('/categorys/{category}', 'destroy')->name('category.destroy')
+        Route::delete('/categories/{category}', 'destroy')->name('category.destroy')
             ->middleware('can:destroy,advert');
     });
 });

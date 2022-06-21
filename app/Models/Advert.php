@@ -15,7 +15,7 @@ class Advert extends Model
         'picture',
         'price',
         'user_id',
-        'rubric_id',
+        'category_id',
         'status_id',
     ];
 

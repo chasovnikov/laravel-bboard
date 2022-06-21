@@ -39,7 +39,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.advert.index', [
+        return view('home.advert_index', [
                 'adverts' => Auth::user()->adverts()->latest()->get(),
             ]
         );
@@ -52,8 +52,8 @@ class HomeController extends Controller
      */
     public function create()
     {
-        return view('home.advert.create', [
-            'rubrics' => Category::get('name', 'id', 'parent_id'),
+        return view('home.advert_create', [
+            'categories' => Category::all('name', 'id', 'parent_id'),
         ]);
     }
 
@@ -65,6 +65,8 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
+
         $validated = $request->validate(
             self::ADVERT_VALIDATOR,
             self::ADVERT_ERROR_MESSAGES
@@ -74,21 +76,22 @@ class HomeController extends Controller
             'title' => $validated['title'],
             'description' => $validated['description'],
             'price' => $validated['price'],
+            // 'category_id' => $validated['categories'],   
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('home.advert_index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Advert $advert)
-    {
-        return view('show', ['advert' => $advert]);
-    }
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function show(Advert $advert)
+    // {
+    //     return view('home.advert_show', compact('advert'));
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -98,7 +101,7 @@ class HomeController extends Controller
      */
     public function edit(Advert $advert)
     {
-        return view('home.advert.edit', ['advert' => $advert]);
+        return view('home.advert_edit', compact('advert'));
     }
 
     /**
@@ -122,7 +125,7 @@ class HomeController extends Controller
         ]);
         $advert->save();
 
-        return redirect()->route('home');
+        return redirect()->route('home.advert_index');
     }
 
     /**
@@ -135,6 +138,6 @@ class HomeController extends Controller
     {
         $advert->delete();
 
-        return redirect()->route('home');
+        return redirect()->route('home.advert_index');
     }
 }

@@ -6,7 +6,7 @@
 
 <h2>Добавление объявления</h2>
 
-<form action="{{ route('advert.store') }}" method="POST">
+<form action="{{ route('home.store') }}" method="POST">
 
     @csrf
 
@@ -25,10 +25,10 @@
     <div class="form-group">
         <label for="txtTitle">Категория</label>
 
-        <select size="4" class="form-control" name="rubrics">
-            @foreach ($rubrics as $rubric)
-            <option value="{{ $rubric->id }}" @selected(old('rubric->id') == $rubric->id)>
-                {{ $rubric->name }}
+        <select size="4" class="form-control" name="category_id">
+            @foreach ($categories as $category)
+            <option value="{{ $category->id }}" @selected(old('category->id') == $category->id)>
+                {{ $category->name }}
             </option>
             @endforeach
         </select>

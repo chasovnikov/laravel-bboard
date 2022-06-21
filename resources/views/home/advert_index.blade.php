@@ -5,8 +5,8 @@
 @section('main')
 
 <h2>Добро пожаловать, {{ Auth::user()->name }}!</h2>
-<p class="text-right"><a href="{{ route('advert.create') }}">Добавить объявление</a></p>
-<p class="text-right"><a href="{{ route('category.create') }}">Добавить рубрику</a></p>
+<p class="text-right"><a href="{{ route('home.create') }}">Добавить объявление</a></p>
+<!-- <p class="text-right"><a href="{{ route('category.create') }}">Добавить рубрику</a></p> -->
 
 @if (count($adverts) > 0)
 <table class="table table-striped">
@@ -27,10 +27,10 @@
             </td>
             <td>{{ $advert->price }}</td>
             <td>
-                <a href="{{ route('advert.edit', ['advert' => $advert->id]) }}">Изменить</a>
+                <a href="{{ route('home.edit', ['advert' => $advert->id]) }}">Изменить</a>
             </td>
             <td>
-                <form action="{{ route('advert.destroy', ['advert' => $advert->id]) }}" method="POST">
+                <form action="{{ route('home.destroy', ['advert' => $advert->id]) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <input type="submit" class="btn btn-danger" value="Удалить">
